@@ -1,0 +1,5 @@
+{
+  "name": "ZBWA",
+  "displayName": "Zaveri Bazaar Welfare",
+  "entryPoint": "./App.js"
+}
