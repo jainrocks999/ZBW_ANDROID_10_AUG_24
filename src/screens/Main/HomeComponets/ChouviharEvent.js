@@ -76,12 +76,14 @@ const ChouviharEvent = () => {
       // }
       setLoading1(true);
       const user_token = await AsyncStorage.getItem(Storage.user_token);
+      console.log('thisis token', user_token);
       const user_id = await AsyncStorage.getItem(Storage.user_id);
       console.log('user idf', user_id);
       const endPoint =
         member === 'Not a member'
           ? `chouviharevent/check/approval/status/${chauvhir[0]['_id']}`
           : `chouviharevent/check/applied/${chauvhir[0]['_id']}`;
+      console.log('this is endfpoint', endPoint);
       let config = {
         method: 'get',
         url: `${Constants.MainUrl}${endPoint}`,

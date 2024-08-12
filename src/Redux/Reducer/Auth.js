@@ -2,6 +2,7 @@ initialstate = {
   Login1: '',
   showHome: true,
   chauvhir: {},
+  chauvhirls: {},
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -15,6 +16,8 @@ export default (state = initialstate, action) => {
       return {...state, showHome: false};
     case 'set_Chauvihar_event':
       return {...state, chauvhir: action.payload};
+    case 'set_Chauvihar_event_page':
+      return {...state, chauvhirls: action.payload};
 
     default:
       return state;

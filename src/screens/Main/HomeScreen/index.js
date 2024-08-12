@@ -208,9 +208,10 @@ const HomeScreen = () => {
         .then(response => {
           if (response.data?.code == 200) {
             dispatch({
-              type: 'set_Chauvihar_event',
+              type: 'set_Chauvihar_event_page',
               payload: response.data?.data,
             });
+            // set_Chauvihar_event
             navigation.navigate('ChauviharEventDetails');
           }
           // Toast.show(response.data?.message);

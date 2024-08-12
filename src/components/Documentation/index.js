@@ -918,7 +918,8 @@ const Documentation = ({onPress}) => {
           </Modal>
 
           <Modal isVisible={visible6}>
-            <View style={{flex: 1}}>
+            <View
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
               <View style={styles.first1}>
                 <View style={styles.row1}>
                   <View />

@@ -51,6 +51,7 @@ import ChouviharEvent from '../screens/Main/HomeComponets/ChouviharEvent';
 import Chauviharcode from '../screens/Main/HomeComponets/ChauviharQR';
 import ChauViharMenuDates from '../screens/Main/HomeComponets/ChauViharMenuDates';
 import ChauviharEventDetails from '../screens/Main/HomeComponets/ChauviharEventDetails';
+import ChauviharEventSelect from '../screens/Main/HomeComponets/ChauviharEventSelect';
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -136,6 +137,10 @@ function Home() {
       <Stack1.Screen
         name="ChauviharEventDetails"
         component={ChauviharEventDetails}
+      />
+      <Stack1.Screen
+        name="ChauviharEventSelect"
+        component={ChauviharEventSelect}
       />
     </Stack1.Navigator>
   );

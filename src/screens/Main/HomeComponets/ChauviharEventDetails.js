@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   ImageBackground,
   ScrollView,
@@ -9,17 +9,33 @@ import {
   View,
 } from 'react-native';
 import Header from '../../../components/CustomHeader';
-
+import {FlatList} from 'react-native';
+import Toast from 'react-native-simple-toast';
 const ChauviharEventDetails = ({navigation}) => {
-  const {chauvhir} = useSelector(state => state);
-  const event = Array.isArray(chauvhir) ? chauvhir[0] : null;
+  const dispatch = useDispatch();
+  const {chauvhirls} = useSelector(state => state);
+  const event = Array.isArray(chauvhirls) ? chauvhirls[0] : null;
+  const formatDateToIndianFormat = isoDateString => {
+    const date = new Date(isoDateString);
 
-  const formatDate = data => {
-    const formatdate = new Date(data);
-    let day = formatdate.getDay();
-    let month = formatdate.getMonth();
-    let year = formatdate.getFullYear();
-    return `${day}/${month}/${year}`;
+    // Format day, month, and year
+    const day = date.getUTCDate().toString().padStart(2, '0');
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+    const year = date.getUTCFullYear();
+
+    // Format time (12-hour format with AM/PM)
+    let hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    const formattedHours = hours.toString().padStart(2, '0');
+
+    // Combine into final format
+    const formattedDate = `${day}-${month}-${year}`;
+    const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
+
+    return `${formattedDate} `;
   };
 
   if (!event) {
@@ -29,6 +45,62 @@ const ChauviharEventDetails = ({navigation}) => {
       </View>
     );
   }
+  const renderItem = ({item}) => (
+    <View style={styles.card}>
+      <Text style={styles.eventName}>{item.name}</Text>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.label}>Start Date:</Text>
+        <Text style={styles.value}>
+          {formatDateToIndianFormat(item.start_date)}
+        </Text>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.label}>End Date:</Text>
+        <Text style={styles.value}>
+          {formatDateToIndianFormat(item.end_date)}
+        </Text>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.label}>Registration Last Date:</Text>
+        <Text style={styles.value}>
+          {formatDateToIndianFormat(item.registration_last_date)}
+        </Text>
+      </View>
+
+      <View style={styles.infoContainer}>
+        <Text style={styles.label}>Address:</Text>
+        <Text style={styles.value}>{item.address || 'TBD'}</Text>
+      </View>
+
+      <View style={styles.descriptionContainer}>
+        <Text style={styles.label}>Description:</Text>
+        <Text style={styles.value}>
+          {item.description.replace(/<[^>]*>/g, '')}
+        </Text>
+      </View>
+
+      <TouchableOpacity
+        onPress={() => {
+          let date = new Date(item.end_date);
+          let now = new Date();
+          if (now > date) {
+            Toast.show('registration is closed');
+            return;
+          }
+          dispatch({
+            type: 'set_Chauvihar_event',
+            payload: [item],
+          });
+          navigation.navigate('ChouviharEvent');
+        }}
+        style={styles.touch1}>
+        <Text style={styles.text2}>Next</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <ImageBackground
@@ -39,48 +111,7 @@ const ChauviharEventDetails = ({navigation}) => {
         onPress={() => navigation.goBack()}
         onPress2={() => navigation.navigate('Notification')}
       />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <View style={styles.card}>
-          <Text style={styles.eventName}>{event.name}</Text>
-
-          <View style={styles.infoContainer}>
-            <Text style={styles.label}>Start Date:</Text>
-            <Text style={styles.value}>{formatDate(event.start_date)}</Text>
-          </View>
-
-          <View style={styles.infoContainer}>
-            <Text style={styles.label}>End Date:</Text>
-            <Text style={styles.value}>{formatDate(event.end_date)}</Text>
-          </View>
-
-          <View style={styles.infoContainer}>
-            <Text style={styles.label}>Registration Last Date:</Text>
-            <Text style={styles.value}>
-              {formatDate(event.registration_last_date)}
-            </Text>
-          </View>
-
-          <View style={styles.infoContainer}>
-            <Text style={styles.label}>Address:</Text>
-            <Text style={styles.value}>{event.address || 'TBD'}</Text>
-          </View>
-
-          <View style={styles.descriptionContainer}>
-            <Text style={styles.label}>Description:</Text>
-            <Text style={styles.value}>
-              {event.description.replace(/<[^>]*>/g, '')}
-            </Text>
-          </View>
-
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('ChouviharEvent');
-            }}
-            style={styles.touch1}>
-            <Text style={styles.text2}>Next</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+      <FlatList data={chauvhirls} renderItem={renderItem} />
     </ImageBackground>
   );
 };
@@ -88,36 +119,35 @@ const ChauviharEventDetails = ({navigation}) => {
 export default ChauviharEventDetails;
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingVertical: 20,
   },
   card: {
-    // backgroundColor: '#FFFFFF',
-    marginTop: '-15%',
+    marginVertical: 10,
     borderRadius: 8,
     padding: 20,
-    shadowColor: '#fff',
+    // backgroundColor: '#FFFFFF',
+    shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 5,
     width: '90%',
-    alignItems: 'center',
+    alignSelf: 'center',
   },
   eventName: {
     fontSize: 18,
     fontFamily: 'Montserrat-Bold',
-    marginBottom: 20,
+    marginBottom: 10,
     color: '#333',
-    marginLeft: '-5%',
   },
   infoContainer: {
     marginBottom: 10,
@@ -132,10 +162,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Montserrat-Regular',
     color: 'black',
-    marginTop: 5,
+    marginTop: 2,
   },
   descriptionContainer: {
-    marginTop: 0,
+    marginTop: 10,
     width: '100%',
   },
   touch1: {
@@ -145,10 +175,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FCDA64',
     borderRadius: 20,
-    marginTop: 30,
+    marginTop: 20,
+    alignSelf: 'center',
   },
   text2: {
-    // marginLeft: 20,
     fontSize: 18,
     fontFamily: 'Montserrat-Medium',
     color: '#000000',

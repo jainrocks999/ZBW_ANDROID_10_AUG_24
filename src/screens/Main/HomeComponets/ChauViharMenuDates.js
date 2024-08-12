@@ -27,7 +27,7 @@ const ChauViharMenuDates = ({route}) => {
   console.log('thistttttttt', data[0]?.event_foods);
   const getFomarmate = date => {
     var array = date?.split('/');
-    let newdata = `${array[1]}/${array[0]}/${array[2]}`;
+    let newdata = `${array[1]}-${array[0]}-${array[2]}`;
     return newdata;
   };
   const flatlistref = useRef(null);
