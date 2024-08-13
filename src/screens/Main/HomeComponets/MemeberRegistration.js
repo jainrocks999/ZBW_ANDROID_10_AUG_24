@@ -245,7 +245,9 @@ const MemeberRegistration = ({navigation}) => {
         contentContainerStyle={{flexGrow: 1}}>
         <View style={styles.main}>
           <View style={{}}>
-            <Text style={styles.heading}>Member Name</Text>
+            <Text style={styles.heading}>
+              Member Name <Text style={{color: 'red'}}>*</Text>
+            </Text>
             <View style={styles.inputView}>
               <TextInput
                 value={inputs.memberName}
@@ -263,7 +265,9 @@ const MemeberRegistration = ({navigation}) => {
             </View>
           </View>
           <View style={{marginTop: 15}}>
-            <Text style={styles.heading}>Company Name</Text>
+            <Text style={styles.heading}>
+              Company Name <Text style={{color: 'red'}}>*</Text>
+            </Text>
             <View style={styles.inputView}>
               <TextInput
                 value={inputs.companyName}
@@ -281,7 +285,9 @@ const MemeberRegistration = ({navigation}) => {
             </View>
           </View>
           <View style={{marginTop: 15}}>
-            <Text style={styles.heading}>Associated Member Name</Text>
+            <Text style={styles.heading}>
+              Associated Member Name <Text style={{color: 'red'}}>*</Text>
+            </Text>
             <View style={styles.inputView}>
               <TextInput
                 value={inputs.amemberName}
@@ -299,7 +305,9 @@ const MemeberRegistration = ({navigation}) => {
             </View>
           </View>
           <View style={{marginTop: 15}}>
-            <Text style={styles.heading}>Phone Number</Text>
+            <Text style={styles.heading}>
+              Phone Number <Text style={{color: 'red'}}>*</Text>
+            </Text>
             <View style={styles.inputView}>
               <TextInput
                 value={inputs.phone}
@@ -338,7 +346,7 @@ const MemeberRegistration = ({navigation}) => {
                   numberOfLines={1}
                   style={[styles.text2, {marginRight: 20}]}>
                   {photo.name != '' ? photo.name : 'Photo'}
-                  {photo.name == '' && <Text style={{color: 'red'}}>*</Text>}
+                  {photo.name == '' && <Text style={{color: 'red'}}> *</Text>}
                 </Text>
               ) : (
                 <View style={styles.row}>
@@ -363,7 +371,7 @@ const MemeberRegistration = ({navigation}) => {
                   numberOfLines={1}
                   style={[styles.text2, {marginRight: 20}]}>
                   {aadhar.name != '' ? aadhar.name : 'Aadhar Card'}
-                  {aadhar.name == '' && <Text style={{color: 'red'}}>*</Text>}
+                  {aadhar.name == '' && <Text style={{color: 'red'}}> *</Text>}
                 </Text>
               ) : (
                 <View style={styles.row}>

@@ -213,8 +213,9 @@ const HomeScreen = () => {
             });
             // set_Chauvihar_event
             navigation.navigate('ChauviharEventDetails');
+          } else {
+            Toast.show(response.data?.message);
           }
-          // Toast.show(response.data?.message);
           setLoader(false);
         })
         .catch(error => {
@@ -616,6 +617,10 @@ export default HomeScreen;
 
 const data1 = [
   {
+    img: <Image27 height={50} width={50} />,
+    name: `Chauvihar Event`,
+  },
+  {
     img: <Image18 />,
     name: 'Complaints',
   },
@@ -638,6 +643,10 @@ const data1 = [
 ];
 
 const data = [
+  {
+    img: <Image27 height={50} width={50} />,
+    name: `Chauvihar Event`,
+  },
   {
     img: <Image15 />,
     name: 'ZBW News',
@@ -687,13 +696,13 @@ const data = [
     img: <Image26 />,
     name: 'WHY BECOME A\nMEMBER ?',
   },
+];
+
+const data2 = [
   {
     img: <Image27 height={50} width={50} />,
     name: `Chauvihar Event`,
   },
-];
-
-const data2 = [
   {
     img: <Image15 />,
     name: 'ZBW News',
@@ -737,9 +746,5 @@ const data2 = [
   {
     img: <Image26 />,
     name: `WHY BECOME A\nMEMBER ?`,
-  },
-  {
-    img: <Image27 height={50} width={50} />,
-    name: `Chauvihar Event`,
   },
 ];

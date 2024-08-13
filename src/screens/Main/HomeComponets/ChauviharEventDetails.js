@@ -19,13 +19,13 @@ const ChauviharEventDetails = ({navigation}) => {
     const date = new Date(isoDateString);
 
     // Format day, month, and year
-    const day = date.getUTCDate().toString().padStart(2, '0');
-    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-    const year = date.getUTCFullYear();
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString().slice(-2);
 
     // Format time (12-hour format with AM/PM)
-    let hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12; // the hour '0' should be '12'
@@ -35,14 +35,23 @@ const ChauviharEventDetails = ({navigation}) => {
     const formattedDate = `${day}-${month}-${year}`;
     const formattedTime = `${formattedHours}:${minutes} ${ampm}`;
 
-    return `${formattedDate} `;
+    return `${formattedDate}`;
   };
 
   if (!event) {
     return (
-      <View style={styles.container}>
-        <Text>No event details available</Text>
-      </View>
+      <ImageBackground
+        source={require('../../../assets/Logo/background.png')}
+        style={{flex: 1}}>
+        <Header
+          title={'Chauvihar House'}
+          onPress={() => navigation.goBack()}
+          onPress2={() => navigation.navigate('Notification')}
+        />
+        <View style={styles.container}>
+          <Text>No event details available</Text>
+        </View>
+      </ImageBackground>
     );
   }
   const renderItem = ({item}) => (
@@ -52,39 +61,39 @@ const ChauviharEventDetails = ({navigation}) => {
       <View style={styles.infoContainer}>
         <Text style={styles.label}>Start Date:</Text>
         <Text style={styles.value}>
-          {formatDateToIndianFormat(item.start_date)}
+          {formatDateToIndianFormat(item?.start_date)}
         </Text>
       </View>
 
       <View style={styles.infoContainer}>
         <Text style={styles.label}>End Date:</Text>
         <Text style={styles.value}>
-          {formatDateToIndianFormat(item.end_date)}
+          {formatDateToIndianFormat(item?.end_date)}
         </Text>
       </View>
 
       <View style={styles.infoContainer}>
         <Text style={styles.label}>Registration Last Date:</Text>
         <Text style={styles.value}>
-          {formatDateToIndianFormat(item.registration_last_date)}
+          {formatDateToIndianFormat(item?.registration_last_date)}
         </Text>
       </View>
 
       <View style={styles.infoContainer}>
         <Text style={styles.label}>Address:</Text>
-        <Text style={styles.value}>{item.address || 'TBD'}</Text>
+        <Text style={styles.value}>{item?.address || 'TBD'}</Text>
       </View>
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.label}>Description:</Text>
         <Text style={styles.value}>
-          {item.description.replace(/<[^>]*>/g, '')}
+          {item?.description?.replace(/<[^>]*>/g, '')}
         </Text>
       </View>
 
       <TouchableOpacity
         onPress={() => {
-          let date = new Date(item.end_date);
+          let date = new Date(item?.end_date);
           let now = new Date();
           if (now > date) {
             Toast.show('registration is closed');
@@ -132,16 +141,18 @@ const styles = StyleSheet.create({
   },
   card: {
     marginVertical: 10,
-    borderRadius: 8,
+    borderRadius: 20,
     padding: 20,
-    // backgroundColor: '#FFFFFF',
+    backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 5,
-    width: '90%',
+    elevation: 2,
+    width: '70%',
     alignSelf: 'center',
+    // borderWidth: 1,
+    // borderColor: '#FCDA64',
   },
   eventName: {
     fontSize: 18,
@@ -170,13 +181,15 @@ const styles = StyleSheet.create({
   },
   touch1: {
     height: 43,
-    width: 150,
+    width: 180,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FCDA64',
     borderRadius: 20,
     marginTop: 20,
     alignSelf: 'center',
+    elevation: 2,
+    shadowColor: '#fff',
   },
   text2: {
     fontSize: 18,

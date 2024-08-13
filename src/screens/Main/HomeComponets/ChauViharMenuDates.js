@@ -50,7 +50,19 @@ const ChauViharMenuDates = ({route}) => {
         style={styles.expandedContainer}
         collapsed={expandedItem == index ? false : true}>
         <View style={{width: width}}>
-          <List data={item?.day_menus} />
+          {Array.isArray(item?.day_menus) && item?.day_menus.length > 0 ? (
+            <List data={item?.day_menus} />
+          ) : (
+            <View
+              style={{
+                height: 50,
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={styles.text}>Menu is not added for this date</Text>
+            </View>
+          )}
         </View>
       </Collapsible>
     </View>

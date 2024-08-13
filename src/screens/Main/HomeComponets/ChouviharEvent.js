@@ -43,7 +43,7 @@ const ChouviharEvent = () => {
     const user_token = await AsyncStorage.getItem(Storage.user_token);
     let config = {
       method: 'get',
-      url: `${Constants.MainUrl}chouviharevent/get/66b079c22f477781f7092eaa`,
+      url: `${Constants.MainUrl}chouviharevent/get/${chauvhir[0]['_id']}`,
       headers: {
         Authorization: `${user_token}`,
       },
