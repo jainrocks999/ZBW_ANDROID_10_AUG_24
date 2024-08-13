@@ -93,12 +93,14 @@ const ChauviharEventDetails = ({navigation}) => {
 
       <TouchableOpacity
         onPress={() => {
-          let date = new Date(item?.end_date);
+          let date = new Date(item?.registration_last_date);
           let now = new Date();
           if (now > date) {
             Toast.show('registration is closed');
             return;
           }
+          console.log(now.toLocaleDateString());
+          console.log(date.toLocaleDateString());
           dispatch({
             type: 'set_Chauvihar_event',
             payload: [item],
