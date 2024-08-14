@@ -33,6 +33,7 @@
     "moment": "^2.30.1",
     "react": "18.2.0",
     "react-native": "0.72.6",
+    "react-native-auto-height-image": "^3.2.4",
     "react-native-blob-util": "^0.19.8",
     "react-native-collapsible": "^1.6.1",
     "react-native-compressor": "^1.8.24",

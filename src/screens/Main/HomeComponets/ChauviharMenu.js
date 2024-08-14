@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, FlatList, View, Image, Text} from 'react-native';
-
+import {StyleSheet, FlatList, View, Image, Text, Dimensions} from 'react-native';
+import AutoHeightImage from 'react-native-auto-height-image';
 const List = ({data}) => {
   console.log('data', data);
   return (
@@ -13,11 +13,15 @@ const List = ({data}) => {
         <View style={{marginTop: 25}}>
           <Text style={styles.text}>{item?.text}</Text>
           <View style={styles.itemContainer}>
-            <Image
+          <AutoHeightImage
+          width={ Dimensions.get('window').width - 40}
+          source={{ uri: item.image }}
+        /> 
+            {/* <Image
               resizeMode="stretch"
               source={{uri: item.image}}
               style={styles.image}
-            />
+            /> */}
           </View>
         </View>
       )}
@@ -39,7 +43,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   itemContainer: {
-    width: '90%',
+    // width: '90%',
     borderWidth: 1,
     borderColor: '#FCDA64',
     borderRadius: 10,
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     elevation: 5,
     overflow: 'hidden',
-    height: 250,
+    // height: 250,
 
     alignSelf: 'center',
   },

@@ -541,9 +541,9 @@ export const chauvhiarDates = [
   {
     e_date: '31-08-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',
@@ -554,9 +554,9 @@ export const chauvhiarDates = [
   {
     e_date: '01-09-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',
@@ -567,9 +567,9 @@ export const chauvhiarDates = [
   {
     e_date: '02-09-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',
@@ -580,9 +580,9 @@ export const chauvhiarDates = [
   {
     e_date: '03-09-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',
@@ -593,9 +593,9 @@ export const chauvhiarDates = [
   {
     e_date: '04-09-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',
@@ -606,9 +606,9 @@ export const chauvhiarDates = [
   {
     e_date: '05-09-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',
@@ -619,9 +619,9 @@ export const chauvhiarDates = [
   {
     e_date: '06-09-2024',
     option1: [
-      {id: '1', label: 'Ekasna', value: 'Ekasna'},
-      {id: '2', label: 'Biyasna', value: 'Biyasna'},
-      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
+      { id: '1', label: 'Ekasana', value: 'Ekasana' },
+      { id: '2', label: 'Biyasana', value: 'Biyasana' },
+      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
     ],
     option2: {
       Morning: 'Morning',

@@ -79,10 +79,10 @@ const ChauviharEventDetails = ({navigation}) => {
         </Text>
       </View>
 
-      <View style={styles.infoContainer}>
+      {/* <View style={styles.infoContainer}>
         <Text style={styles.label}>Address:</Text>
         <Text style={styles.value}>{item?.address || 'TBD'}</Text>
-      </View>
+      </View> */}
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.label}>Description:</Text>

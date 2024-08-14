@@ -94,8 +94,8 @@ android {
         applicationId "com.zbw"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 91
-        versionName "4.1.6"
+        versionCode 92
+        versionName "4.1.7"
     }
     signingConfigs {
           release {

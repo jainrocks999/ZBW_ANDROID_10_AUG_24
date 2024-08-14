@@ -215,13 +215,13 @@ const ChouviharEvent = () => {
                 <Text style={styles.text}>{'Registration'}</Text>
               </TouchableOpacity>
             ) : null}
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={() => {
                 onPressMenu();
               }}
               style={styles.touch1}>
               <Text style={styles.text}>{'Menu'}</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {status !== '' || status == 'Member' ? (
               <TouchableOpacity
                 onPress={() => {

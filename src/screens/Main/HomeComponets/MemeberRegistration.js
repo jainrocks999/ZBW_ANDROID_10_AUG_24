@@ -149,10 +149,10 @@ const MemeberRegistration = ({navigation}) => {
       Toast.show('Please enter Company Name ');
       return;
     }
-    if (!inputs.amemberName) {
-      Toast.show('Please enter Associated Member Name ');
-      return;
-    }
+    // if (!inputs.amemberName) {
+    //   Toast.show('Please enter Associated Member Name ');
+    //   return;
+    // }
     if (!inputs.phone) {
       Toast.show('Please enter Mobile Number ');
       return;
@@ -285,9 +285,7 @@ const MemeberRegistration = ({navigation}) => {
             </View>
           </View>
           <View style={{marginTop: 15}}>
-            <Text style={styles.heading}>
-              Associated Member Name <Text style={{color: 'red'}}>*</Text>
-            </Text>
+          <Text style={styles.heading}>Associated Association (if any)</Text>
             <View style={styles.inputView}>
               <TextInput
                 value={inputs.amemberName}
@@ -379,6 +377,20 @@ const MemeberRegistration = ({navigation}) => {
                 </View>
               )}
             </TouchableOpacity>
+            <View style={{ flexDirection: "row" }}>
+              <Text style={{
+                fontFamily: 'Montserrat-Bold', color: '#000000',
+                fontSize: 12,
+                marginTop: 5
+              }}>Note :-</Text>
+              <Text style={{
+                fontFamily: 'Montserrat-Medium',
+                color: '#000000',
+                fontSize: 12,
+                marginTop: 5,
+                width:"90%"
+              }}> Upload a valid Aadhar card to prevent registration cancellation.</Text>
+            </View>
           </View>
         </View>
         <View
