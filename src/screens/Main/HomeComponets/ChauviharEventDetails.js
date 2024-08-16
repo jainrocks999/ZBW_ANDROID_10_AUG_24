@@ -11,7 +11,10 @@ import {
 import Header from '../../../components/CustomHeader';
 import {FlatList} from 'react-native';
 import Toast from 'react-native-simple-toast';
+import HTMLView from "react-native-htmlview";
+
 const ChauviharEventDetails = ({navigation}) => {
+  const regex = /<br|\n|\r\s*\\?>/g;
   const dispatch = useDispatch();
   const {chauvhirls} = useSelector(state => state);
   const event = Array.isArray(chauvhirls) ? chauvhirls[0] : null;
@@ -86,9 +89,12 @@ const ChauviharEventDetails = ({navigation}) => {
 
       <View style={styles.descriptionContainer}>
         <Text style={styles.label}>Description:</Text>
-        <Text style={styles.value}>
+        {console.log(item?.description)
+        }
+        <HTMLView  value={`<div>${item?.description.trim().replace(regex, '')}</div>`}/>
+        {/* <Text style={styles.value}>
           {item?.description?.replace(/<[^>]*>/g, '')}
-        </Text>
+        </Text> */}
       </View>
 
       <TouchableOpacity
@@ -128,6 +134,14 @@ const ChauviharEventDetails = ({navigation}) => {
 };
 
 export default ChauviharEventDetails;
+const htmlStyle = StyleSheet.create({
+  p: {
+    fontWeight: '300',
+    color: '#FF3366', // make links coloured pink
+    // color:"red"
+    margin:0
+  },
+});
 
 const styles = StyleSheet.create({
   background: {
@@ -151,7 +165,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-    width: '70%',
+    width: '90%',
     alignSelf: 'center',
     // borderWidth: 1,
     // borderColor: '#FCDA64',

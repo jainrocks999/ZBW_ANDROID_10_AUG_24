@@ -59,6 +59,23 @@ const MemeberRegistration = ({navigation}) => {
       .join(' ');
     setInputs(prev => ({...prev, [param]: newwal}));
   };
+  const handleInputs2 = (param, value) => {
+    
+    // Validate the mobile number
+    const regex=/^\d{0,10}$/
+    ;
+    let newval = value;
+    console.log('thissisissi',regex.test(value));
+    
+  
+    if (regex.test(value)) {
+      setInputs(prev => ({ ...prev, [param]: newval }));
+    
+    } 
+  
+   
+  };
+  
   const [aadhar, setAddhar] = useState({
     name: '',
     type: '',
@@ -141,6 +158,7 @@ const MemeberRegistration = ({navigation}) => {
     }
   };
   const handleOnSubmit = () => {
+   const regex = /^\d{10}$/;
     if (!inputs.memberName) {
       Toast.show('Please enter Member Name');
       return;
@@ -157,10 +175,14 @@ const MemeberRegistration = ({navigation}) => {
       Toast.show('Please enter Mobile Number ');
       return;
     }
-    if (!inputs.phone) {
-      Toast.show('Please enter Mobile Number ');
+    if (!regex.test(inputs.phone)) {
+      Toast.show('Please enter a valid 10-digit Mobile Number');
       return;
     }
+    // if (!regex.test(inputs.phone)) {
+    //   Toast.show('Please enter Mobile Number ');
+    //   return;
+    // }
 
     if (!inputs.radio) {
       Toast.show('Please select radio button');
@@ -178,6 +200,8 @@ const MemeberRegistration = ({navigation}) => {
     doRegister();
     // navigation.navigate('ChauviharEventList');
   };
+  console.log(inputs.phone);
+  
   const doRegister = async () => {
     try {
       setLoading(true);
@@ -309,7 +333,7 @@ const MemeberRegistration = ({navigation}) => {
             <View style={styles.inputView}>
               <TextInput
                 value={inputs.phone}
-                onChangeText={val => handleInputs('phone', val)}
+                onChangeText={val => handleInputs2('phone', val)}
                 style={{
                   color: '#000000',
                   fontSize: 14,
@@ -319,6 +343,7 @@ const MemeberRegistration = ({navigation}) => {
                 }}
                 keyboardType="number-pad"
                 maxLength={10}
+                contextMenuHidden={true} 
               />
             </View>
           </View>
