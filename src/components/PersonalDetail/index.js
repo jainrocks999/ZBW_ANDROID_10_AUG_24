@@ -195,8 +195,14 @@ const PersonalDetail = () => {
               </Text>
               <View style={styles.inputView}>
                 <TextInput
+                contextMenuHidden
                   value={phone}
-                  onChangeText={val => setPhone(val)}
+                  onChangeText={val => {
+                    const regex = /^\d{0,10}$/;
+                    if (regex.test(val)) {
+                      setPhone(val);
+                    }
+                  }}
                   style={{
                     color: '#000000',
                     fontSize: 14,
@@ -234,8 +240,14 @@ const PersonalDetail = () => {
               </Text>
               <View style={styles.inputView}>
                 <TextInput
+                contextMenuHidden
                   value={emergencyNumber}
-                  onChangeText={val => setEmergencyNumber(val)}
+                  onChangeText={val =>{
+                    const regex = /^\d{0,10}$/;
+                    if (regex.test(val)) { 
+                    setEmergencyNumber(val)
+                    }
+                  }}
                   style={{
                     color: '#000000',
                     fontSize: 14,
@@ -335,7 +347,7 @@ const PersonalDetail = () => {
             open={open}
             date={date}
             mode={'date'}
-            maximumDate={new Date()}
+            maximumDate={new Date(2010, 11, 31)}
             onConfirm={date => {
               setOpen(false);
               // setDate(date)

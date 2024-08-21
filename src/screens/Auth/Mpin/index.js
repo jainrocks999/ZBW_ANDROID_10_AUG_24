@@ -145,9 +145,15 @@ const Login = () => {
                     <View style={styles.country}>
                       <Text style={styles.ninety}>+91</Text>
                       <TextInput style={styles.input}
+                      contextMenuHidden
                         placeholder="Phone Number"
                         placeholderTextColor={'#FFFFFF'}
-                        onChangeText={(value)=>setMobile(value)}
+                        onChangeText={(value)=>{
+                          const regex = /^\d{0,10}$/;
+                          if (regex.test(value)) {
+                          setMobile(value)
+                          }
+                        }}
                         value={mobile}
                         keyboardType="number-pad"
                         maxLength={10}

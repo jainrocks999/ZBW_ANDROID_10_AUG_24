@@ -126,7 +126,7 @@ const Drawer = () => {
                 AsyncStorage.setItem("Member_contact","")
                 Toast.show(response.data.message)
                 setLoader(false)
-                navigation.replace('Login')
+                navigation.replace('FirstPage')
             }
             else{
                 Toast.show(response.data.message)
@@ -271,6 +271,8 @@ console.log(local,"this is local date");
             });
     }
     const updateMemberdata = async () => {
+        navigation.navigate('UpdateMemberDetails')
+        return
         const user_token = await AsyncStorage.getItem(Storage.user_token)
         let config = {
             method: 'get',

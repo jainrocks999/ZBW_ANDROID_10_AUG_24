@@ -505,6 +505,54 @@ const Documentation = ({ onPress }) => {
       }
     }
   };
+  const _pickDocument2 = async type => {
+    try {
+      // const result = await DocumentPicker.pickSingle({
+      //   type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
+      // });
+      const result=await launchImageLibrary(checklistImage)
+      const res = result?.assets[0];
+      if (type == 'photograph') {
+        setPhoto(res.uri);
+        setPhotoName(res.fileName);
+        setPhotoType(res.type);
+      }
+      if (type == 'gstCertificate') {
+        setGst(res.uri);
+        setGstName(res.fileName);
+        setGstType(res.type);
+      }
+      if (type == 'pancard') {
+        setPan(res.uri);
+        setPanName(res.fileName);
+        setPanType(res.type);
+      }
+      if (type == 'aadharcard') {
+        setAadhar(res.uri);
+        setAadharName(res.fileName);
+        setAadharType(res.type);
+      }
+      if (type == 'iecCertificate') {
+        setIec(res.uri);
+        setIecName(res.fileName);
+        setIecType(res.type);
+      }
+      if (type == 'bisCertificate') {
+        setBis(res.uri);
+        setBisName(res.fileName);
+        setBisType(res.type);
+      } else {
+      }
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        console.log('User cancelled file picker');
+      } else {
+        console.log('DocumentPicker err => ', err);
+        throw err;
+      }
+    }
+  };
+
 
   return (
     <ImageBackground source={require('../../assets/Logo/background.png')} style={styles.container}>
@@ -662,233 +710,401 @@ const Documentation = ({ onPress }) => {
 
         </View>
       </Modal>
-
       <Modal isVisible={visible1}>
-                <View style={styles.first1}>
-                    <View style={styles.row1}>
-                        <View />
-                        <TouchableOpacity
-                            onPress={() => setVisible1(false)}
-                            style={styles.touch1}>
-                            <CircleCross />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modal}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible1(false)
-                                setTimeout(() => {
-                                  launchCameraForPhoto()
-                                }, 500);
-                               
-                            }}
-                            style={styles.camera}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                 setVisible1(false)
-                                 setTimeout(() => {
-                                  _pickDocument('photograph')
-                                 }, 500);
-                               
-                            }
-                            }
-                            style={styles.button1}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Gallery</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
+            <View style={styles.first1}>
+              <View style={styles.row1}>
+                <View />
+                <TouchableOpacity
+                  onPress={() => setVisible1(false)}
+                  style={styles.touch1}>
+                  <CircleCross />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modal}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible1(false);
+                    setTimeout(() => {
+                      launchCameraForPhoto();
+                    }, 500);
+                  }}
+                  style={styles.camera}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Camera
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible1(false);
+                    setTimeout(() => {
+                      _pickDocument('photograph');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible1(false);
+                    setTimeout(() => {
+                      _pickDocument2('photograph');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Gallery
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
 
-            <Modal isVisible={visible2}>
-                <View style={styles.first1}>
-                    <View style={styles.row1}>
-                        <View />
-                        <TouchableOpacity
-                            onPress={() => setVisible2(false)}
-                            style={styles.touch1}>
-                            <CircleCross />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modal}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible2(false)
-                                setTimeout(() => {
-                                  launchCameraForCertificate()
-                                }, 500);
-                               
-                            }}
-                            style={styles.camera}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible2(false)
-                                setTimeout(() => {
-                                  _pickDocument('gstCertificate')
-                                }, 500);
-                                
-                            }
-                            }
-                            style={styles.button1}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Gallery</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
+          <Modal isVisible={visible2}>
+            <View style={styles.first1}>
+              <View style={styles.row1}>
+                <View />
+                <TouchableOpacity
+                  onPress={() => setVisible2(false)}
+                  style={styles.touch1}>
+                  <CircleCross />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modal}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible2(false);
+                    setTimeout(() => {
+                      launchCameraForCertificate();
+                    }, 500);
+                  }}
+                  style={styles.camera}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Camera
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible2(false);
+                    setTimeout(() => {
+                      _pickDocument('gstCertificate');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible2(false);
+                    setTimeout(() => {
+                      _pickDocument2('gstCertificate');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 14,
+                    }}>
+                    Gallery
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          <Modal isVisible={visible3}>
+            <View style={styles.first1}>
+              <View style={styles.row1}>
+                <View />
+                <TouchableOpacity
+                  onPress={() => setVisible3(false)}
+                  style={styles.touch1}>
+                  <CircleCross />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modal}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible3(false);
+                    setTimeout(() => {
+                      launchCameraForPan();
+                    }, 500);
+                  }}
+                  style={styles.camera}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Camera
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible3(false);
+                    setTimeout(() => {
+                      _pickDocument('pancard');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible3(false);
+                    setTimeout(() => {
+                      _pickDocument2('pancard');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 14,
+                    }}>
+                    Gallery
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
 
-            <Modal isVisible={visible3}>
-                <View style={styles.first1}>
-                    <View style={styles.row1}>
-                        <View />
-                        <TouchableOpacity
-                            onPress={() => setVisible3(false)}
-                            style={styles.touch1}>
-                            <CircleCross />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modal}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible3(false)
-                                setTimeout(() => {
-                                  launchCameraForPan()
-                                }, 500);
-                                
-                            }}
-                            style={styles.camera}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible3(false)
-                                setTimeout(() => {
-                                  _pickDocument('pancard')
-                                }, 500);
-                               
-                            }
-                            }
-                            style={styles.button1}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Gallery</Text>
-                        </TouchableOpacity>
-                    </View>
+          <Modal isVisible={visible4}>
+            <View style={styles.first1}>
+              <View style={styles.row1}>
+                <View />
+                <TouchableOpacity
+                  onPress={() => setVisible4(false)}
+                  style={styles.touch1}>
+                  <CircleCross />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modal}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible4(false);
+                    setTimeout(() => {
+                      launchCameraForAadhar();
+                    }, 500);
+                  }}
+                  style={styles.camera}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Camera
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible4(false);
+                    setTimeout(() => {
+                      _pickDocument('aadharcard');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible4(false);
+                    setTimeout(() => {
+                      _pickDocument2('aadharcard');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Gallery
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          <Modal isVisible={visible5}>
+            <View style={styles.first1}>
+              <View style={styles.row1}>
+                <View />
+                <TouchableOpacity
+                  onPress={() => setVisible5(false)}
+                  style={styles.touch1}>
+                  <CircleCross />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modal}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible5(false);
+                    setTimeout(() => {
+                      launchCameraForIec();
+                    }, 500);
+                  }}
+                  style={styles.camera}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Camera
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible5(false);
+                    setTimeout(() => {
+                      _pickDocument('iecCertificate');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible5(false);
+                    setTimeout(() => {
+                      _pickDocument2('iecCertificate');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 14,
+                    }}>
+                    Gallery
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          <Modal isVisible={visible6}>
+            <View
+              style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <View style={styles.first1}>
+                <View style={styles.row1}>
+                  <View />
+                  <TouchableOpacity
+                    onPress={() => setVisible6(false)}
+                    style={styles.touch1}>
+                    <CircleCross />
+                  </TouchableOpacity>
                 </View>
-            </Modal>
-
-            <Modal isVisible={visible4}>
-                <View style={styles.first1}>
-                    <View style={styles.row1}>
-                        <View />
-                        <TouchableOpacity
-                            onPress={() => setVisible4(false)}
-                            style={styles.touch1}>
-                            <CircleCross />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modal}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible4(false)
-                                setTimeout(() => {
-                                  launchCameraForAadhar()
-                                }, 500);
-                                
-                            }}
-                            style={styles.camera}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible4(false)
-                                setTimeout(() => {
-                                  _pickDocument('aadharcard')
-                                }, 500);
-                                
-                            }
-                            }
-                            style={styles.button1}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Gallery</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={styles.modal}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisible6(false);
+                      setTimeout(() => {
+                        launchCameraForBis();
+                      }, 500);
+                    }}
+                    style={styles.camera}>
+                    <Text
+                      style={{
+                        color: '#fff',
+                        fontFamily: 'Montserrat-SemiBold',
+                        fontSize: 12,
+                      }}>
+                      Camera
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisible6(false);
+                      setTimeout(() => {
+                        _pickDocument('bisCertificate');
+                      }, 500);
+                    }}
+                    style={styles.button1}>
+                    <Text
+                      style={{
+                        color: '#fff',
+                        fontFamily: 'Montserrat-SemiBold',
+                        fontSize: 12,
+                      }}>
+                      Document
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisible6(false);
+                      setTimeout(() => {
+                        _pickDocument2('bisCertificate');
+                      }, 500);
+                    }}
+                    style={styles.button1}>
+                    <Text
+                      style={{
+                        color: '#fff',
+                        fontFamily: 'Montserrat-SemiBold',
+                        fontSize: 12,
+                      }}>
+                      Gallery
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-            </Modal>
-
-            <Modal isVisible={visible5}>
-                <View style={styles.first1}>
-                    <View style={styles.row1}>
-                        <View />
-                        <TouchableOpacity
-                            onPress={() => setVisible5(false)}
-                            style={styles.touch1}>
-                            <CircleCross />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modal}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible5(false)
-                                setTimeout(() => {
-                                  launchCameraForIec()
-                                }, 500);
-                                
-                            }}
-                            style={styles.camera}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible5(false)
-                                setTimeout(() => {
-                                  _pickDocument('iecCertificate')
-                                }, 500);
-                                
-                            }
-                            }
-                            style={styles.button1}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Gallery</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
-
-            <Modal isVisible={visible6}>
-                <View style={styles.first1}>
-                    <View style={styles.row1}>
-                        <View />
-                        <TouchableOpacity
-                            onPress={() => setVisible6(false)}
-                            style={styles.touch1}>
-                            <CircleCross />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.modal}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                setVisible6(false)
-                                setTimeout(() => {
-                                  launchCameraForBis()
-                                }, 500);
-                                
-                            }}
-                            style={styles.camera}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Camera</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                 setVisible6(false)
-                                 setTimeout(() => {
-                                  _pickDocument('bisCertificate')
-                                 }, 500);
-                            }
-                            }
-                            style={styles.button1}>
-                            <Text style={{ color: '#fff', fontFamily: 'Montserrat-SemiBold', fontSize: 14 }}>Gallery</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </Modal>
+              </View>
+            </View>
+          </Modal>
             </KeyboardAwareScrollView>
             </ScrollView>
     </ImageBackground>
@@ -905,7 +1121,7 @@ const styles = StyleSheet.create({
 },
 camera: {
     backgroundColor: '#000',
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
@@ -913,7 +1129,7 @@ camera: {
 },
   button1: {
     backgroundColor: '#000',
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
@@ -923,7 +1139,7 @@ camera: {
     backgroundColor: '#FDEDB1',
     height: 125,
     borderRadius: 16,
-    width: '84%',
+    width: '100%',
     alignSelf: 'center',
 
 },

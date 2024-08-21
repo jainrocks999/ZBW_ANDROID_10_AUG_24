@@ -199,16 +199,26 @@ const ChouviharEvent = () => {
               <TouchableOpacity
                 disabled={status == 'Pending'}
                 onPress={async () => {
-                  const showMember = await AsyncStorage.getItem('Member');
-                  if (showMember == 'Not a member') {
-                    if (status == 'Pending') {
-                      Toast.show(statusMsg);
-                    } else {
-                      navigation.navigate('MemeberRegistration');
-                    }
-                  } else {
+                  const showMember = await AsyncStorage.getItem('isMember');
+                  const isSecondary = await AsyncStorage.getItem('isSecondary');
+                  console.log(showMember);
+                  if (isSecondary == 1) {
+                    console.log('this is for secondary');
+                    
                     navigation.navigate('ChauviharEventList');
-                    // navigation.navigate('MemeberRegistration');
+                  } else {
+                    console.log('this is for non member');
+                    if (showMember == 0) {
+                      if (status == 'Pending') {
+                        Toast.show(statusMsg);
+                      } else {
+                        navigation.navigate('MemeberRegistration');
+                      }
+                    } else if (showMember == 1) {
+                      console.log('this is for  member');
+                      navigation.navigate('ChauviharEventList');
+                      // navigation.navigate('MemeberRegistration');
+                    }
                   }
                 }}
                 style={[styles.touch1]}>

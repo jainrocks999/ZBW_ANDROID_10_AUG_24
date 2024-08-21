@@ -302,15 +302,17 @@ const ChauviharEventdetails = ({route}) => {
       // console.log('tuyyuyyuyyyu', nonMember[0]['_id']);
       setLoading(true);
       const user_token = await AsyncStorage.getItem(LocalStorage.user_token);
-      const member = await AsyncStorage.getItem('Member');
+      const member = await AsyncStorage.getItem('isMember');
+      const isSecondary = await AsyncStorage.getItem('isSecondary');
       const chauvhiar_id = chauvhir[0]['_id'];
       const event_data = {
         chouviharEvId: chauvhiar_id,
-        isMember: member == 'Not a member' ? 0 : 1,
+        isMember: isSecondary == 1 ? 1 : member == 1 ? 1 : 0,
         nonMember: nonMember ? nonMember[0]['_id'] : '',
         foods: data,
       };
       console.log('data====>>>>', JSON.stringify(event_data));
+      // return
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -325,11 +327,16 @@ const ChauviharEventdetails = ({route}) => {
       const response = await axios(config);
       console.log('response======>>', JSON.stringify(response.data));
       if (response.data?.code == 200) {
-        if (member == 'Not a member') {
-          navigation.reset({index: 0, routes: [{name: 'Home'}]});
-        } else {
+        if (isSecondary == 1) {
           setQrCodeVisible(true);
           setQrCode(response.data.data);
+        } else {
+          if (member == 0) {
+            navigation.reset({index: 0, routes: [{name: 'Home'}]});
+          } else if (member == 1) {
+            setQrCodeVisible(true);
+            setQrCode(response.data.data);
+          }
         }
       } else {
         navigation.reset({index: 0, routes: [{name: 'Home'}]});
@@ -541,9 +548,9 @@ export const chauvhiarDates = [
   {
     e_date: '31-08-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',
@@ -554,9 +561,9 @@ export const chauvhiarDates = [
   {
     e_date: '01-09-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',
@@ -567,9 +574,9 @@ export const chauvhiarDates = [
   {
     e_date: '02-09-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',
@@ -580,9 +587,9 @@ export const chauvhiarDates = [
   {
     e_date: '03-09-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',
@@ -593,9 +600,9 @@ export const chauvhiarDates = [
   {
     e_date: '04-09-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',
@@ -606,9 +613,9 @@ export const chauvhiarDates = [
   {
     e_date: '05-09-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',
@@ -619,9 +626,9 @@ export const chauvhiarDates = [
   {
     e_date: '06-09-2024',
     option1: [
-      { id: '1', label: 'Ekasana', value: 'Ekasana' },
-      { id: '2', label: 'Biyasana', value: 'Biyasana' },
-      { id: '3', label: 'Chauvihar', value: 'Chauvihar' },
+      {id: '1', label: 'Ekasana', value: 'Ekasana'},
+      {id: '2', label: 'Biyasana', value: 'Biyasana'},
+      {id: '3', label: 'Chauvihar', value: 'Chauvihar'},
     ],
     option2: {
       Morning: 'Morning',

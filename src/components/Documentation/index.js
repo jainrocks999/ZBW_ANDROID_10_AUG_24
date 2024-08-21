@@ -437,6 +437,53 @@ const Documentation = ({onPress}) => {
       }
     }
   };
+  const _pickDocument2 = async type => {
+    try {
+      // const result = await DocumentPicker.pickSingle({
+      //   type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
+      // });
+      const result=await launchImageLibrary(checklistImage)
+      const res = result?.assets[0];
+      if (type == 'photograph') {
+        setPhoto(res.uri);
+        setPhotoName(res.fileName);
+        setPhotoType(res.type);
+      }
+      if (type == 'gstCertificate') {
+        setGst(res.uri);
+        setGstName(res.fileName);
+        setGstType(res.type);
+      }
+      if (type == 'pancard') {
+        setPan(res.uri);
+        setPanName(res.fileName);
+        setPanType(res.type);
+      }
+      if (type == 'aadharcard') {
+        setAadhar(res.uri);
+        setAadharName(res.fileName);
+        setAadharType(res.type);
+      }
+      if (type == 'iecCertificate') {
+        setIec(res.uri);
+        setIecName(res.fileName);
+        setIecType(res.type);
+      }
+      if (type == 'bisCertificate') {
+        setBis(res.uri);
+        setBisName(res.fileName);
+        setBisType(res.type);
+      } else {
+      }
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        console.log('User cancelled file picker');
+      } else {
+        console.log('DocumentPicker err => ', err);
+        throw err;
+      }
+    }
+  };
 
   return (
     <ImageBackground
@@ -695,7 +742,7 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     Camera
                   </Text>
@@ -712,7 +759,24 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible1(false);
+                    setTimeout(() => {
+                      _pickDocument2('photograph');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
                     }}>
                     Gallery
                   </Text>
@@ -744,7 +808,7 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     Camera
                   </Text>
@@ -754,6 +818,23 @@ const Documentation = ({onPress}) => {
                     setVisible2(false);
                     setTimeout(() => {
                       _pickDocument('gstCertificate');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible2(false);
+                    setTimeout(() => {
+                      _pickDocument2('gstCertificate');
                     }, 500);
                   }}
                   style={styles.button1}>
@@ -793,7 +874,7 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     Camera
                   </Text>
@@ -803,6 +884,23 @@ const Documentation = ({onPress}) => {
                     setVisible3(false);
                     setTimeout(() => {
                       _pickDocument('pancard');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible3(false);
+                    setTimeout(() => {
+                      _pickDocument2('pancard');
                     }, 500);
                   }}
                   style={styles.button1}>
@@ -842,7 +940,7 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     Camera
                   </Text>
@@ -859,7 +957,24 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible4(false);
+                    setTimeout(() => {
+                      _pickDocument2('aadharcard');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
                     }}>
                     Gallery
                   </Text>
@@ -891,7 +1006,7 @@ const Documentation = ({onPress}) => {
                     style={{
                       color: '#fff',
                       fontFamily: 'Montserrat-SemiBold',
-                      fontSize: 14,
+                      fontSize: 12,
                     }}>
                     Camera
                   </Text>
@@ -901,6 +1016,23 @@ const Documentation = ({onPress}) => {
                     setVisible5(false);
                     setTimeout(() => {
                       _pickDocument('iecCertificate');
+                    }, 500);
+                  }}
+                  style={styles.button1}>
+                  <Text
+                    style={{
+                      color: '#fff',
+                      fontFamily: 'Montserrat-SemiBold',
+                      fontSize: 12,
+                    }}>
+                    Document
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setVisible5(false);
+                    setTimeout(() => {
+                      _pickDocument2('iecCertificate');
                     }, 500);
                   }}
                   style={styles.button1}>
@@ -942,7 +1074,7 @@ const Documentation = ({onPress}) => {
                       style={{
                         color: '#fff',
                         fontFamily: 'Montserrat-SemiBold',
-                        fontSize: 14,
+                        fontSize: 12,
                       }}>
                       Camera
                     </Text>
@@ -959,7 +1091,24 @@ const Documentation = ({onPress}) => {
                       style={{
                         color: '#fff',
                         fontFamily: 'Montserrat-SemiBold',
-                        fontSize: 14,
+                        fontSize: 12,
+                      }}>
+                      Document
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setVisible6(false);
+                      setTimeout(() => {
+                        _pickDocument2('bisCertificate');
+                      }, 500);
+                    }}
+                    style={styles.button1}>
+                    <Text
+                      style={{
+                        color: '#fff',
+                        fontFamily: 'Montserrat-SemiBold',
+                        fontSize: 12,
                       }}>
                       Gallery
                     </Text>
@@ -984,7 +1133,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     backgroundColor: '#000',
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
@@ -992,7 +1141,7 @@ const styles = StyleSheet.create({
   },
   button1: {
     backgroundColor: '#000',
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
@@ -1002,7 +1151,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDEDB1',
     height: 125,
     borderRadius: 16,
-    width: '84%',
+    width: '100%',
     alignSelf: 'center',
   },
   row1: {

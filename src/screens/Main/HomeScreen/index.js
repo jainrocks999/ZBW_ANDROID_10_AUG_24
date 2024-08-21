@@ -56,6 +56,7 @@ const HomeScreen = () => {
   const [banner, setBanner] = useState([]);
   const [contact, setContact] = useState();
   const [showMember, setShowMember] = useState('');
+  const [secondary,setSecondary]=useState('')
   const isFocus = useIsFocused();
   const [showModal, setShowModal] = useState(showHome);
 
@@ -93,6 +94,11 @@ const HomeScreen = () => {
           setLoader(false);
 
           AsyncStorage.setItem('Member', response.data.message);
+          AsyncStorage.setItem('isMember', JSON.stringify(response.data.data.member));
+          AsyncStorage.setItem('isSecondary', JSON.stringify(response.data.data.secondary));
+          setSecondary(response.data.data.secondary)
+          console.log('ttittitit>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',response.data.data.member);
+          
           AsyncStorage.setItem(
             'Member_id',
             JSON.stringify(response.data.data.member_id),
@@ -114,6 +120,12 @@ const HomeScreen = () => {
             response.data.data.emergencyContactNumber,
           );
           AsyncStorage.setItem('Member', response.data.message);
+          AsyncStorage.setItem('isMember', JSON.stringify(response.data.data.member));
+          AsyncStorage.setItem('isSecondary', JSON.stringify(response.data.data.secondary));
+          setSecondary(response.data.data.secondary)
+
+
+          console.log('ttittitit>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',response.data.data.member);
           setLoader(false);
           setShowMember(response.data.message);
         }
@@ -412,18 +424,18 @@ const HomeScreen = () => {
         </View>
         <View style={styles.view}>
           <FlatList
-            data={showMember == 'Not a member' ? data : data2}
+            data={showMember == 'Not a member' ? data :secondary==1?data3: data2}
             numColumns={2}
             renderItem={({item, index}) => (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => onItemPress(item.name)}
-                style={styles.item}>
-                {item.img}
-                <Text style={[styles.name, {textAlign: 'center'}]}>
-                  {item.name}
-                </Text>
-              </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={() => onItemPress(item.name)}
+              style={styles.item}>
+              {item.img}
+              <Text style={[styles.name, {textAlign: 'center'}]}>
+                {item.name}
+              </Text>
+            </TouchableOpacity>
             )}
           />
         </View>
@@ -711,6 +723,56 @@ const data2 = [
     img: <Image17 />,
     name: 'Secondary Member',
   },
+  {
+    img: <Image18 />,
+    name: 'Complaints',
+  },
+  {
+    img: <Image19 />,
+    name: 'Events',
+  },
+  {
+    img: <Image20 />,
+    name: 'Our Partners',
+  },
+  {
+    img: <Image22 />,
+    name: 'Order Copies',
+  },
+  // {
+  //     img: <Image21 />,
+  //     name: 'Price Chart'
+  // },
+  {
+    img: <Image23 />,
+    name: 'Legal Support',
+  },
+  {
+    img: <Image24 />,
+    name: 'Our Team',
+  },
+  {
+    img: <Image25 />,
+    name: 'Our Achievements',
+  },
+  {
+    img: <Image26 />,
+    name: `WHY BECOME A\nMEMBER ?`,
+  },
+];
+const data3 = [
+  {
+    img: <Image27 height={50} width={50} />,
+    name: `Chauvihar Event`,
+  },
+  {
+    img: <Image15 />,
+    name: 'ZBW News',
+  },
+  // {
+  //   img: <Image17 />,
+  //   name: 'Secondary Member',
+  // },
   {
     img: <Image18 />,
     name: 'Complaints',

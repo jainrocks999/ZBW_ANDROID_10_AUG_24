@@ -205,7 +205,13 @@ const BusinessDetail = ({onPress}) => {
               <View style={styles.inputView}>
                 <TextInput
                   value={phone}
-                  onChangeText={val => setPhone(val)}
+                  contextMenuHidden={true}
+                  onChangeText={val => {
+                    const regex = /^\d{0,10}$/;
+                    if (regex.test(val)) {
+                      setPhone(val);
+                    }
+                  }}
                   style={{
                     color: '#000000',
                     fontSize: 14,

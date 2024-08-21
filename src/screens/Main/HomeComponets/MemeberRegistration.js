@@ -157,6 +157,44 @@ const MemeberRegistration = ({navigation}) => {
       });
     }
   };
+  const _pickDocument2 = async type => {
+    try {
+      // const result = await DocumentPicker.pickSingle({
+      //   type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
+      // });
+      const result= await launchImageLibrary(checklistImage)
+      const res = result.assets[0];
+
+      if (visible.adhar) {
+        setAddhar({
+          name: res.fileName,
+          type: res.type,
+          uri: res.uri,
+        });
+      } else if (visible.photo) {
+        setPhoto({
+          name: res.fileName,
+          type: res.type,
+          uri: res.uri,
+        });
+      }
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        console.log('User cancelled file picker');
+      } else {
+        console.log('DocumentPicker err => ', err);
+        throw err;
+      }
+    } finally {
+      setVisible(prev => {
+        return {
+          adhar: false,
+          photo: false,
+          visible: false,
+        };
+      });
+    }
+  };
   const handleOnSubmit = () => {
    const regex = /^\d{10}$/;
     if (!inputs.memberName) {
@@ -458,7 +496,7 @@ const MemeberRegistration = ({navigation}) => {
                   style={{
                     color: '#fff',
                     fontFamily: 'Montserrat-SemiBold',
-                    fontSize: 14,
+                    fontSize: 12,
                   }}>
                   Camera
                 </Text>
@@ -474,7 +512,23 @@ const MemeberRegistration = ({navigation}) => {
                   style={{
                     color: '#fff',
                     fontFamily: 'Montserrat-SemiBold',
-                    fontSize: 14,
+                    fontSize: 12,
+                  }}>
+                  Document
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setTimeout(() => {
+                    _pickDocument2('aadharcard');
+                  }, 500);
+                }}
+                style={styles.button1}>
+                <Text
+                  style={{
+                    color: '#fff',
+                    fontFamily: 'Montserrat-SemiBold',
+                    fontSize: 12,
                   }}>
                   Gallery
                 </Text>
@@ -560,7 +614,7 @@ const styles = StyleSheet.create({
   text: {fontSize: 12, fontFamily: 'Montserrat-SemiBold', color: '#000'},
   button1: {
     backgroundColor: '#000',
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
@@ -570,7 +624,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDEDB1',
     height: 125,
     borderRadius: 16,
-    width: '84%',
+    width: '90%',
     alignSelf: 'center',
   },
   row1: {
@@ -592,7 +646,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     backgroundColor: '#000',
-    width: 100,
+    width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,

@@ -46,7 +46,7 @@ const Splash = () => {
       if (Platform.OS == 'android') {
         console.log('thuisdisis version',response.data?.data?.android_version);
         
-        if (response.data?.data?.android_version > '4.1.7') {
+        if (response.data?.data?.android_version > '4.1.8') {
           setAndroidUrl(response.data.data.android_url);
           setModalVisible(true);
         } else {
@@ -102,7 +102,7 @@ const Splash = () => {
 
   const openUrl = () => {
     if (Platform.OS == 'android') {
-      AsyncStorage.setItem('user_token', '');
+      // AsyncStorage.setItem('user_token', '');
       Linking.openURL(androidUrl);
     } else {
       Linking.openURL(iosUrl);
