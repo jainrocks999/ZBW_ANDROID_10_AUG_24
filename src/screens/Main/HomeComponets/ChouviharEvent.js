@@ -53,7 +53,9 @@ const ChouviharEvent = () => {
       axios.request(config).then(res => {
         const response = res.data;
         if (response.success) {
-          navigation.navigate('ChauViharMenuDates', {data: response.data});
+          console.log(JSON.stringify(response.data));
+          
+          // navigation.navigate('ChauViharMenuDates', {data: response.data});
         }
         Toast.show(response?.message);
         setLoading(false);
@@ -201,7 +203,8 @@ const ChouviharEvent = () => {
                 onPress={async () => {
                   const showMember = await AsyncStorage.getItem('isMember');
                   const isSecondary = await AsyncStorage.getItem('isSecondary');
-                  console.log(showMember);
+                  // onPressMenu()
+                  // console.log(showMember);
                   if (isSecondary == 1) {
                     console.log('this is for secondary');
                     
@@ -217,7 +220,6 @@ const ChouviharEvent = () => {
                     } else if (showMember == 1) {
                       console.log('this is for  member');
                       navigation.navigate('ChauviharEventList');
-                      // navigation.navigate('MemeberRegistration');
                     }
                   }
                 }}
@@ -236,7 +238,7 @@ const ChouviharEvent = () => {
               <TouchableOpacity
                 onPress={() => {
                   getQR();
-                  // navigation.navigate('MemeberRegistration');
+                  // navigation.navigate('ChauviharEventList');
                 }}
                 style={styles.touch1}>
                 <Text style={styles.text}>{'Download QR'}</Text>

@@ -271,8 +271,8 @@ console.log(local,"this is local date");
             });
     }
     const updateMemberdata = async () => {
-        navigation.navigate('UpdateMemberDetails')
-        return
+        // navigation.navigate('UpdateMemberDetails')
+        // return
         const user_token = await AsyncStorage.getItem(Storage.user_token)
         let config = {
             method: 'get',
@@ -490,7 +490,7 @@ console.log(local,"this is local date");
             </View>
             </ScrollView>
             <View style={styles.bottom}>
-                <Text style={styles.about}>Version 4.1.5</Text>
+                <Text style={styles.about}>Version 4.1.9</Text>
             </View>
             <Modal isVisible={visible}>
                 <View style={{ backgroundColor: '#FDEDB1', 

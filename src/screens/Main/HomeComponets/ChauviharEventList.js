@@ -73,24 +73,47 @@ const ChauviharEventdetails = ({route}) => {
         </Text>
       </View>
       <View style={styles.cell}>
-        <RadioGroup
-          containerStyle={{
-            flexDirection: 'column',
-            width: '100%',
-            justifyContent: 'space-between',
-          }}
-          labelStyle={{
-            fontSize: 12,
-            fontFamily: 'Montserrat-SemiBold',
-            color: '#000000',
-            width: 74,
-          }}
-          radioButtons={item.option1}
-          onPress={id => {
-            handleRadioPress(index, id);
-          }}
-          selectedId={selectedOptions[index]}
-        />
+        {item.e_date != '01-09-2024' ? (
+          <RadioGroup
+            containerStyle={{
+              flexDirection: 'column',
+              width: '100%',
+              justifyContent: 'space-between',
+            }}
+            labelStyle={{
+              fontSize: 12,
+              fontFamily: 'Montserrat-SemiBold',
+              color: '#000000',
+              width: 74,
+            }}
+            radioButtons={item.option1}
+            onPress={id => {
+              handleRadioPress(index, id);
+            }}
+            selectedId={selectedOptions[index]}
+          />
+        ) : (
+          <View style={{padding:18,alignItems:'center',justifyContent:'center',borderWidth:0}}>
+            <Text
+              style={{
+                fontSize: 15,
+                fontFamily: 'Montserrat-SemiBold',
+                color: '#000000',
+                // width: 74,
+              }}>
+              Sunday
+            </Text>
+            <Text
+              style={{
+                fontSize: 15,
+                fontFamily: 'Montserrat-SemiBold',
+                color: '#000000',
+                // width: 74,
+              }}>
+              Closed
+            </Text>
+          </View>
+        )}
       </View>
       <View style={styles.cell}>
         {selectedOptions[index] && selectedOptions[index] !== '1' ? (
@@ -262,15 +285,16 @@ const ChauviharEventdetails = ({route}) => {
       );
       return;
     }
-
-    if (unselectedDates.length > 0) {
+    const datewihouutSunay=unselectedDates.filter(item=>item!="01-09-2024")
+  
+    if (datewihouutSunay.length > 0) {
       Alert.alert(
         'Alert',
-        unselectedDates.length > 1
-          ? `Are you sure you don't want to attend the event on these days: ${unselectedDates.join(
+        datewihouutSunay.length > 1
+          ? `Are you sure you don't want to attend the event on these days: ${datewihouutSunay.join(
               ', ',
             )}?`
-          : `Are you sure you don't want to attend the event on this day: ${unselectedDates[0]}?`,
+          : `Are you sure you don't want to attend the event on this day: ${datewihouutSunay[0]}?`,
         [
           {
             text: 'Cancel',
@@ -311,7 +335,9 @@ const ChauviharEventdetails = ({route}) => {
         nonMember: nonMember ? nonMember[0]['_id'] : '',
         foods: data,
       };
-      console.log('data====>>>>', JSON.stringify(event_data));
+      // console.log('data====>>>>', JSON.stringify(event_data));
+      // return
+      // setLoading(false)
       // return
       let config = {
         method: 'post',
@@ -325,7 +351,6 @@ const ChauviharEventdetails = ({route}) => {
       };
       // const response = responsee;
       const response = await axios(config);
-      console.log('response======>>', JSON.stringify(response.data));
       if (response.data?.code == 200) {
         if (isSecondary == 1) {
           setQrCodeVisible(true);

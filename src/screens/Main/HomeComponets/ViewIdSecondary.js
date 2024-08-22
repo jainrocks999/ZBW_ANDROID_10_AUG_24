@@ -110,7 +110,7 @@ const ViewId = ({ route }) => {
           {/* <Text style={{ fontSize: 16, marginTop: 15, fontFamily: 'Montserrat-SemiBold', color: '#000' }}>Director</Text> */}
           <Text style={{ fontSize: 16, marginTop: 4, fontFamily: 'Montserrat-SemiBold', color: '#000' }}>{`Date of Birth : `}{renderDate(data?.member?.dob)}</Text>
 
-          <Text style={{ fontSize: 16, marginTop: 4, fontFamily: 'Montserrat-SemiBold', color: '#000' }}>{`Emergency Contact : ${data?.member?.emergencyContact}`}</Text>
+          <Text style={{ fontSize: 16, marginTop: 4, fontFamily: 'Montserrat-SemiBold', color: '#000' }}>{`Phone No. : ${data?.member?.phone}`}</Text>
         </View> : null}
       </ImageBackground>
     </View>

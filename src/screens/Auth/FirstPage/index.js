@@ -123,7 +123,7 @@ const Login = () => {
                       <View style={styles.country}>
                         <Text style={styles.ninety}>+91</Text>
                         <TextInput
-                        contextMenuHidden
+                        contextMenuHidden ={true}
                           style={styles.input}
                           placeholder="Phone Number"
                           placeholderTextColor={'#FFFFFF'}
@@ -132,6 +132,13 @@ const Login = () => {
                             const regex = /^\d{0,10}$/;
                             if (regex.test(val)) {
                               setMobile(val);
+                            }
+                          }}
+                          onLongPress={() => {
+                            if (Platform.OS == 'android') {
+                              // Disable long press on Android to prevent copy-paste
+                              Alert.alert('Action Disabled', 'Copy-paste is disabled for this field.');
+                              return true; // Prevent the default behavior
                             }
                           }}
                           keyboardType="number-pad"

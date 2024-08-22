@@ -58,6 +58,8 @@ const ViewId = () => {
       .request(config)
       .then(response => {
         if (response.data.code == '200') {
+          console.log(JSON.stringify(response.data.data));
+          
           setData(response.data.data);
           setLoader(false);
         } else {
@@ -173,7 +175,7 @@ const ViewId = () => {
                   marginTop: 4,
                   fontFamily: 'Montserrat-SemiBold',
                   color: '#000',
-                }}>{`Emergency Contact : ${data?.member?.personalDetails?.emergencyContact}`}</Text>
+                }}>{`Phone No. : ${data?.member?.createdBy?.phone}`}</Text>
             </View>
           ) : null}
         </ImageBackground>
@@ -251,7 +253,7 @@ const ViewId = () => {
                   marginTop: 4,
                   fontFamily: 'Montserrat-SemiBold',
                   color: '#000',
-                }}>{`Emergency Contact : ${data?.member?.emergencyContact}`}</Text>
+                }}>{`Phone No. : ${data?.member?.phone}`}</Text>
             </View>
           ) : null}
         </ImageBackground>
